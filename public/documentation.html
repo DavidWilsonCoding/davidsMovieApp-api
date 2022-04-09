@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">myFlix API</h1>
+    <div style="text-align: center">
+      Description: The myFlix API returns information about movies including genre,
+      length, release date and stars.
+      <br><br>
+      It also provides functionality for adding new users and for existing users to update their information including adding and removing movies from their FavouriteMovies array.
+    </div>
+    <br />
+    <table border="1px solid black " style="margin: 10px 200px">
+      <th>Business Logic</th>
+      <th>URL Endpoint</th>
+      <th>HTTP Method</th>
+      <th>Query Parameters</th>
+      <th>Request body data format</th>
+      <th>Response body data format</th>
+      <tr>
+        <td>Return data about ALL movies in the database.</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>NONE</td>
+        <td>NONE</td>
+        <td>
+            <pre>
+              {
+                Title: '',
+                Description,
+                ImagePath,
+                Featured,
+                Genre: {
+                  Name: '',
+                  Description: ''
+                },
+                Director: {
+                  Name: '',
+                  Bio: '',
+                  Birth: '',
+                  Death: ''
+                },
+                Actors: []
+              }
+            </pre>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Return data about a single movie queried by title
+        </td>
+        <td>/movies/:title</td>
+        <td>GET</td>
+        <td>title</td>
+        <td>NONE</td>
+        <td>
+          <pre>
+            {
+              Title: '',
+              Description,
+              ImagePath,
+              Featured,
+              Genre: {
+                Name: '',
+                Description: ''
+              },
+              Director: {
+                Name: '',
+                Bio: '',
+                Birth: '',
+                Death: ''
+              },
+              Actors: []
+            }
+          </pre></td>
+      </tr>
+      <tr>
+        <td>
+          Return data about a genre queried by genre name
+        </td>
+        <td>/movies/genres/:Name</td>
+        <td>GET</td>
+        <td>(Genre).Name</td>
+        <td>NONE</td>
+        <td>
+          <pre>
+            (Genre)
+            {
+              Name: '',
+              Description: ''
+            }
+          </pre></td>
+      </tr>
+      <tr>
+        <td>
+          Return data about a director queried by director name
+        </td>
+        <td>/movies/directors/:Name</td>
+        <td>GET</td>
+        <td>(Director).Name</td>
+        <td>NONE</td>
+        <td>
+          <pre>
+            (Director)
+            {
+              Name: '',
+              Bio: '',
+              Birth: '',
+              Death: ''
+            }
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>NONE</td>
+
+        <td>
+          <pre>
+            {
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Allow users to update their user info</td>
+        <td>/users/:Username</td>
+        <td>PUT</td>
+        <td>Username</td>
+        <td>
+          <pre>
+            {
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/:Username/movies/:id</td>
+        <td>POST</td>
+        <td>Username, (Movie)id</td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>/users/:userId/:movie</td>
+        <td>DELETE</td>
+        <td>userId, movie</td>
+        <td>NONE</td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/:userId</td>
+        <td>DELETE</td>
+        <td>NONE</td>
+        <td>NONE</td>
+        <td>
+          <pre>
+            {
+              "id": '',
+              "Username": '',
+              "Password": '',
+              "Email": '',
+              "Birthday": '',
+              "FavoriteMovies": []
+            }
+          </pre>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
