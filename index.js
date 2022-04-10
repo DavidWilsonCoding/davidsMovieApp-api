@@ -29,7 +29,7 @@ console.log("in index.js");
 // mongoose.connect('mongodb://localhost:27017/davidsMovieAppDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Comnnect to hosted AtlasDB
-mongoose.connect( process.env.CONNECTION-URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //log request data in terminal
 app.use(morgan('common'));
