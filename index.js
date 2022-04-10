@@ -26,10 +26,10 @@ const { check, validationResult } = require('express-validator');
 console.log("in index.js");
 
 //connect to locacl MongoDB
-mongoose.connect('mongodb://localhost:27017/davidsMovieAppDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/davidsMovieAppDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Comnnect to hosted AtlasDB
-// mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //log request data in terminal
 app.use(morgan('common'));
