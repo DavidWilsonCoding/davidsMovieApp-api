@@ -261,7 +261,6 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 
 //display Welcome message
 app.get('/', (req, res) => {
-  console.log('here');
   res.send("Welcome to David's Movie App!");
 });
   
