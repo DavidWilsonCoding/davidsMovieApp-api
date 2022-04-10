@@ -271,9 +271,9 @@ res.status(500).send('Oops, there was an error requesting the page');
 });
 
 //listen on port 8080
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
 
 //listen on heroku
-// app.listen(port, '0.0.0.0',() => {
-//  console.log('Listening on Port ' + port);
-// });
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
+});
