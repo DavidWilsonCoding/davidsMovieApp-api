@@ -57,7 +57,7 @@ app.use(express.static('public'));
 
 //passport.authenticate('jwt', { session: false }), 
 //GET all movies
-app.get ('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get ('/movies', (req, res) => {
   Movies.find()
   .then((movies) => {
     res.status(200).json(movies);
@@ -166,10 +166,9 @@ app.post('/users',
         console.error(error);
         res.status(500).send('Error: ' + error);
       });
-  });
+    });
 
-
-//PUT nuewUserName (to allow users to update user data by Username)
+//PUT UserName (to allow users to update user data by Username)
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
   check('Username', 'Username with a minimum length of 5 characters is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
