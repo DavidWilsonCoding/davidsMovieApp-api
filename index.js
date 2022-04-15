@@ -256,9 +256,21 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
     .catch((err) => {
       console.error(err);
       res.status(500).send('Error: ' + err);
-    });
   });
-console.log('about to get');
+});
+
+//GET user by username
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+          res.json(user);
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      });
+});
+
 //display Welcome message
 app.get('/', (req, res) => {
   res.send("Welcome to David's Movie App!");
@@ -269,7 +281,7 @@ app.use((err, req, res, next) => {
 console.error(err.stack);
 res.status(500).send('Oops, there was an error requesting the page');
 });
-//comment
+
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
