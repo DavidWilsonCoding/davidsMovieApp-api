@@ -241,7 +241,7 @@ app.put('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sessi
     });
 });
 
-//DELETE user from users
+//DELETE user from users by Username
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   //find user by username
   Users.findOneAndRemove({ Username : req.params.Username}) 
@@ -259,7 +259,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
   });
 });
 
-//GET user by username
+//GET user by Username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOne({ Username: req.params.Username })
       .then((user) => {
@@ -270,6 +270,28 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
           res.status(500).send('Error: ' + err);
       });
 });
+
+//delete a user's favorite movie by ID
+app.delete(
+  "/users/:Username/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $pull: { FavoriteMovies: req.params.MovieID },
+      },
+      { new: true }
+    )
+      .then((updatedInfo) => {
+        res.json(updatedInfo);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //display Welcome message
 app.get('/', (req, res) => {
