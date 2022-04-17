@@ -271,7 +271,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
       });
 });
 
-//delete a user's favorite movie by ID
+//DELETE a user's favorite movie by ID
 app.delete(
   "/users/:Username/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -290,6 +290,29 @@ app.delete(
         console.log(err);
         res.status(500).send("Error: " + err);
       });
+  }
+);
+
+//POST add a movie to user's favorute movies
+app.post(
+  "/users/:Username/movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $push: { FavoriteMovies: req.params.MovieID },
+      },
+      { new: true }, // This line makes sure that the updated document is returned
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        } else {
+          res.json(updatedUser);
+        }
+      }
+    );
   }
 );
 
